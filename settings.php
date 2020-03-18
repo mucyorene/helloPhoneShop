@@ -68,7 +68,7 @@ include("includes/navAdmin.php");
 			<div class="col-md-3"></div>
 		</div>
 	</div>
-	<nav class="navbar navbar-expand-lg navbar-default bg-info fixed-bottom" style="height:40px;">
+	<nav class="navbar navbar-expand-lg navbar-default bg-secondary fixed-bottom" style="height:30px;">
 		<div class="container">
 		  <div class="col-md-3"></div>
 		  <div class="col-md-6">
@@ -84,3 +84,8 @@ include("includes/navAdmin.php");
 	  </nav>
 </body>
 </html>
+<script>
+    $(function(){
+        $("#admin6").addClass('active');
+    });
+</script>

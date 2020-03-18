@@ -1,7 +1,10 @@
 <?php
 	include("includes/connect.php");
-    session_start();
-    $id = $_GET['idToUpdate'];
+	session_start();
+	
+	$idAll = $_GET['idToUpdate'];
+	$ids = explode("!",$idAll);
+	$id = $ids[1];
         //echo $id;
 	if (!$_SESSION['adminLogin']) {
 		echo "<script type='text/javascript'>window.top.location='index.php'</script>";
@@ -16,6 +19,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 	<title>HelloPhone</title>
 	
 </head>
@@ -49,7 +55,18 @@ include("includes/navAdmin.php");
                                 move_uploaded_file($_FILES['pic']['tmp_name'],'media/phonePhoto/'.$d);
                                 echo "<script>window.top.location = 'admin.php'</script>";
                             }
-                        }else{
+						}elseif (!empty($a) && !empty($b) && !empty($c) && !empty($e)) {
+							$edit = mysqli_query($conn,"UPDATE phones SET 
+                                phoneName = '$a',
+                                price = '$b',
+                                phoneDescriptions = '$c',
+                                quantity = '$e' WHERE id = '$id'") or die(mysqli_error($conn));
+                            if($edit){
+                                move_uploaded_file($_FILES['pic']['tmp_name'],'media/phonePhoto/'.$d);
+                                echo "<script>window.top.location = 'admin.php'</script>";
+                            }
+						}
+						else{
                                 echo "<h4 class='alert alert-danger'>Fill out all fields</h4>";
                             }
                             }
@@ -91,16 +108,16 @@ include("includes/navAdmin.php");
 						</div>
 						<div class="form-group">
 							<label for="" class="form-control-label">Thumbnail</label>
-							<input type="file" value="<?= $row['phoneImange']?>" class="form-control" name="pic">
+							<input type="file" class="form-control" name="pic">
 						</div>
-						<input type='submit' class="btn btn-info btn-sm" name="edits" value="Register">
+						<input type='submit' class="btn btn-info btn-sm" name="edits" value="Edit">
 					</form>
 				</fieldset>
 			</div>
 			<div class="col-md-3"></div>
 		</div>
 	</div>
-	<nav class="navbar navbar-expand-lg navbar-default bg-info fixed-bottom" style="height:40px;">
+	<nav class="navbar navbar-expand-lg navbar-default bg-secondary fixed-bottom" style="height:30px;">
 		<div class="container">
 		  <div class="col-md-3"></div>
 		  <div class="col-md-6">
@@ -116,6 +133,13 @@ include("includes/navAdmin.php");
 	  </nav>
 </body>
 </html>
+<script>
+    $(function(){
+        $("#admin1").addClass('active');
+    });
+</script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
 	function validatePhone(){
 	 if (document.phoneRegister.phoneNames.value == "") {

@@ -19,7 +19,19 @@ include("includes/nav.php");
 ?>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-9">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-3">
+						<select name="" id="" class="form-control">
+							<option value="">Categories</option>
+						</select>
+					</div>
+					<div class="col-md-9">
+						<input type="text" placeholder="Search here!" class="form-control">
+					</div>
+				</div>
+			</div>&nbsp;
+			<div class="col-md-12">
 			<?php
 			$query = mysqli_query($conn,"SELECT *FROM phones ORDER BY id DESC") or die(mysqli_error($conn));
 			if (mysqli_num_rows($query)>0) {
@@ -27,21 +39,39 @@ include("includes/nav.php");
 					?>
 					<div class="row">
 					<?php while ($row = mysqli_fetch_array($query)) {?>
-							<div class="col-md-4">
+							<div class="col-md-3">
 							  <div class="card">
 								<img src="media/phonePhoto/<?= $row['phoneImange'];?>" class="card-img-top" alt="...">
 								<div class="card-body">
 									<h5 class="card-title"><?= $row['phoneName']?></h5>
 										<p class="card-text">
 											<b>Price: </b><?= $row['price']?> <b>Rwf</b><br>
-											<b>Quantity: </b><?= $row['quantity']?><br>
+											<?php
+												if ($row['quantity']>0) {?>
+													<b>Quantity: </b><?= $row['quantity']?><br>
+													<?php
+												}else {
+													?>
+														<b>Quantity: </b><span class="text-danger"><b>Sold out</b></span><br>
+													<?php
+												}
+											?>
 											<b>About: </b><?= $row['phoneDescriptions']?><br>
 										</p>
-									<button data-toggle="modal" data-target="#<?= "view".$row['id']; ?>" class="btn btn-outline-info btn-flat">More</button>
+										<?php
+												if ($row['quantity']>0) {?>
+													<button class="btn btn-sm btn-warning btn-flat">Add to cart <span class="fa fa-add"></span></button>
+													<?php
+												}else {
+													?>
+														<button disabled class="btn btn-sm btn-warning btn-flat">Add to cart <span class="fa fa-add"></span></button>
+													<?php
+												}
+											?>
+									<button data-toggle="modal" data-target="#<?= "view".$row['id']; ?>" class="btn btn-sm btn-outline-info btn-flat">More</button>
 							    </div>
 							   </div><br>
 							</div>
-							
 								<div class="modal fade" id="<?= $fId ="view".$row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 								<?php
 									$ids = explode('view',$fId);
@@ -60,25 +90,24 @@ include("includes/nav.php");
 									<div class="modal-body">
 									<p><b>Descriptions: </b><?= $rs['phoneDescriptions']?></p><br>
 									<p><b>Price: </b><?= $rs['price']?></p><br>
-									<p><b>Quantity: </b><?= $rs['quantity']?></p><br>
+									<p>
+									<?php
+										if ($row['quantity']>0) {?>
+											<b>Quantity: </b><?= $row['quantity']?><br>
+											<?php
+										}else {
+											?>
+												<b>Quantity: </b><span class="text-danger"><b>Sold out</b></span><br>
+											<?php
+										}
+									?>
+									</p><br>
 									<img src="media/phonePhoto/<?= $rs['phoneImange']?>" class="img" alt="">
 									</div>
 									
 									</div>
 								</div>
 								</div>
-
-
-
-
-
-
-
-
-
-
-
-
 					<?php
 				}?>
 				</div><br>
@@ -88,54 +117,10 @@ include("includes/nav.php");
 			}
 			?>
 			</div>
-			<div class="col-md-3"><br><br><br><br>
-				<fieldset>
-					<legend class="text-info">Login Here</legend>
-					<?php
-						if (isset($_POST['login'])) {
-							$a = mysqli_real_escape_string($conn,$_POST['username']);
-							$b = mysqli_real_escape_string($conn,$_POST['password']);							
-							$query = mysqli_query($conn,"SELECT *FROM admin WHERE username = '$a' AND password='$b'") or die(mysqli_error());
-							$query2 = mysqli_query($conn,"SELECT *FROM customers WHERE username = '$a' AND password='$b'") or die(mysqli_error());
-						if (mysqli_num_rows($query)>0) {
-							$row = mysqli_fetch_array($query);
-							$_SESSION['adminLogin'] = $row['id'];
-							?>
-							<script type="text/javascript">
-								window.top.location = "admin.php";
-							</script>
-							<?php
-						}else if(mysqli_num_rows($query2)>0){
-							$row = mysqli_fetch_array($query2);
-							$_SESSION['userLogin'] = $row['id'];
-							?>
-							<script type="text/javascript">
-								window.top.location = "home.php";
-							</script>
-							<?php
-						}
-						else{
-							echo "<h6 class='alert alert-danger'>Incorrect username or password</h6>";
-						}
-						}
-					?>
-					<form action="" class="form" method="POST">
-						<div class="form-group">
-							<label for="" class="form-control-label">Username</label>
-							<input type="text" name="username" class="form-control" required id="" placeholder="Username">
-						</div>
-						<div class="form-group">
-							<label for="" class="form-control-label">Password</label>
-							<input type="password" name="password" class="form-control" id="" placeholder="Password">
-						</div>
-							<input type="submit" class="btn btn-info btn-sm" name="login" value="Login">
-					</form>
-				</fieldset>
-			</div>
 			</div>
 		</div>
 	</div>
-	<nav class="navbar navbar-expand-lg navbar-default bg-info fixed-bottom" style="height:30px;">
+	<nav class="navbar navbar-expand-lg navbar-default bg-secondary fixed-bottom" style="height:30px;">
 		<div class="container">
 		  <div class="col-md-3"></div>
 		  <div class="col-md-6">

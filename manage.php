@@ -27,27 +27,31 @@ include("includes/navAdmin.php");
             <div class="col-md-8">
                 <table class="table table-hover">
                     <tr>
-						<th>N<sup>o</sup></th>
-						<th>NAMES</th>
-						<th>EMAIL</th>
-						<th>COMMENT</th>
-						<th>ACTION</th>
+                        <td>N<sup>o</sup></td><td>Thumbnail</td>
+						<td>Phone Name</td>
+						<td>Price</td>
+						<td>Available</td>
+						<td>Total</td>
                     </tr>
                     <?php
-                        $query = mysqli_query($conn,"SELECT *FROM feedbacks");
+                        $query = mysqli_query($conn,"SELECT *FROM phones ORDER BY id DESC");
                         if (mysqli_num_rows($query)>0) {
                             $a = 1;
                             while ($fe = mysqli_fetch_array($query)) {
                                ?>
                                <tr>
-								<td><?= $a;?></td><td><?= $fe['names']?></td><td><?= $fe['emails']?></td><td><?= $fe['contents']?></td>
-								<td><a href="pages/deleteComment.php?id=<?= rand()."jk@kl(*fddw][".rand()."LlfkeLjjNK".rand()."!".$fe['id']."!".rand()."dJKLL[sdFsd!".rand()."343er!KSfd]]fdss"?>" class="btn btn-sm btn-danger">Delete</a></td>
+                                <td><?= $a;?></td>
+								<td><img src="media/phonePhoto/<?= $fe['phoneImange']?>" alt="No Image found"></td>
+								<td><?= $fe['phoneName']?></td>
+								<td><?= $fe['price']?></td>
+								<td><?= $fe['quantity']?></td>
+								<td><?= (($fe['quantity'])*($fe['price']))?></td>
                                </tr>
                                <?php
                             $a++;}
                         }
                     ?>
-                </table>
+                </table><br>
             </div>
 			<div class="col-md-2"></div>
 		</div>
@@ -70,6 +74,6 @@ include("includes/navAdmin.php");
 </html>
 <script>
     $(function(){
-        $("#admin5").addClass('active');
+        $("#admin3").addClass('active');
     });
 </script>

@@ -11,7 +11,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+	<script src="vendor/jquery/jquery.min.js"></script>
 	<title>HelloPhone</title>
 	
 </head>
@@ -25,7 +26,7 @@ include("includes/navAdmin.php");
 			<div class="col-md-3"></div>
 			<div class="col-md-6">
 				<fieldset>
-					<legend><h2 class="text-info">PHONE REGISTRATION FORM</h2></legend>
+					<legend><h2 class="text-info">ADD NEW PHONE</h2></legend>
 					<?php
 						if (isset($_POST['register'])) {
 							$a = mysqli_real_escape_string($conn,$_POST['phoneNames']);
@@ -94,7 +95,7 @@ include("includes/navAdmin.php");
 			<div class="col-md-3"></div>
 		</div>
 	</div>
-	<nav class="navbar navbar-expand-lg navbar-default bg-info fixed-bottom" style="height:40px;">
+	<nav class="navbar navbar-expand-lg navbar-default bg-secondary fixed-bottom" style="height:30px;">
 		<div class="container">
 		  <div class="col-md-3"></div>
 		  <div class="col-md-6">
@@ -108,6 +109,8 @@ include("includes/navAdmin.php");
 		  <div class="col-md-3"></div>
 		</div>
 	  </nav>
+	  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 <script type="text/javascript">
@@ -142,4 +145,9 @@ include("includes/navAdmin.php");
 	 }
 	 return true;
 	}
+</script>
+<script>
+    $(function(){
+        $("#admin4").addClass('active');
+    });
 </script>

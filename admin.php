@@ -25,8 +25,19 @@ include("includes/navAdmin.php");
 ?>
 	<div class="container">
 		<div class="row">
-		<div class="col-md-1"></div>
-		 <div class="col-md-10">
+		<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-3">
+						<select name="" id="" class="form-control">
+							<option value="">Categories</option>
+						</select>
+					</div>
+					<div class="col-md-9">
+						<input type="text" placeholder="Search here!" class="form-control">
+					</div>
+				</div>
+			</div>&nbsp;
+		 <div class="col-md-12">
 			<?php
 			$query = mysqli_query($conn,"SELECT *FROM phones ORDER BY id DESC") or die(mysqli_error($conn));
 			if (mysqli_num_rows($query)>0) {
@@ -34,21 +45,30 @@ include("includes/navAdmin.php");
 					?>
 					<div class="row">
 					<?php while ($row = mysqli_fetch_array($query)) {?>
-							<div class="col-md-4">
+							<div class="col-md-3">
 							  <div class="card">
 								<img src="media/phonePhoto/<?= $row['phoneImange'];?>" class="card-img-top" alt="...">
 								<div class="card-body">
 									<h5 class="card-title"><?= $row['phoneName']?></h5>
 										<p class="card-text">
 											<b>Price: </b><?= $row['price']?> <b>Rwf</b><br>
-											<b>Quantity: </b><?= $row['quantity']?><br>
+											<?php
+												if ($row['quantity']>0) {?>
+													<b>Quantity: </b><?= $row['quantity']?><br>
+													<?php
+												}else {
+													?>
+														<b>Quantity: </b><span class="text-danger"><b>Sold out</b></span><br>
+													<?php
+												}
+											?>
 											<b>About: </b><?= $row['phoneDescriptions']?><br>
 										</p>
 							    </div>
 									<div class="card-footer bg-white">
 										<div class="row">
 											<div class="col-md-4">
-												<a class="btn btn-sm btn-outline-info" href="updatePhone.php?idToUpdate=<?=$row['id'];?>">Edit</a>
+												<a class="btn btn-sm btn-outline-info" href="updatePhone.php?idToUpdate=<?= rand()."f2".rand()."2j".rand()."dd".rand()."kfdkk?\]sd]dk!".$row['id']."!sd]dd]e\sds".rand()."jhk".rand()."?fkjfk".rand()."32?ds".$row['id']."?jlsd!43kllkkjj".rand()?>">Edit</a>
 											</div>
 											<div class="col-md-4"></div>
 											<div class="col-md-4">
@@ -77,9 +97,8 @@ include("includes/navAdmin.php");
 			</div>
 			</div>
 		</div>
-		<div class="col-md-1"></div>
 	</div>
-	<nav class="navbar navbar-expand-lg navbar-default bg-info fixed-bottom" style="height:40px;">
+	<nav class="navbar navbar-expand-lg navbar-default bg-secondary fixed-bottom" style="height:30px;">
 		<div class="container">
 		  <div class="col-md-3"></div>
 		  <div class="col-md-6">
@@ -97,3 +116,8 @@ include("includes/navAdmin.php");
 	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>	
 </body>
 </html>
+<script>
+    $(function(){
+        $("#admin1").addClass('active');
+    });
+</script>

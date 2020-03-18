@@ -16,7 +16,6 @@
 	<script src="vendor/jquery/jquery.min.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 	<title>HelloPhone</title>
-	
 </head>
 <body style="overflow-y: scroll;">
 	<!-- Navigation -->
@@ -25,8 +24,19 @@ include("includes/navCustomers.php");
 ?>
 		<div class="container">
 		<div class="row">
-		<div class="col-md-1"></div>
-		 <div class="col-md-10">
+		<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-3">
+						<select name="" id="" class="form-control">
+							<option value="">Categories</option>
+						</select>
+					</div>
+					<div class="col-md-9">
+						<input type="text" placeholder="Search here!" class="form-control">
+					</div>
+				</div>
+			</div>&nbsp;
+		 <div class="col-md-12">
 			<?php
 			$query = mysqli_query($conn,"SELECT *FROM phones ORDER BY id DESC") or die(mysqli_error($conn));
 			if (mysqli_num_rows($query)>0) {
@@ -34,18 +44,37 @@ include("includes/navCustomers.php");
 					?>
 					<div class="row">
 					<?php while ($row = mysqli_fetch_array($query)) {?>
-							<div class="col-md-4">
+							<div class="col-md-3">
 							  <div class="card">
 								<img src="media/phonePhoto/<?= $row['phoneImange'];?>" class="card-img-top" alt="...">
 								<div class="card-body">
 									<h5 class="card-title"><?= $row['phoneName']?></h5>
 										<p class="card-text">
 											<b>Price: </b><?= $row['price']?> <b>Rwf</b><br>
-											<b>Quantity: </b><?= $row['quantity']?><br>
+											<?php
+												if ($row['quantity']>0) {?>
+													<b>Quantity: </b><?= $row['quantity']?><br>
+													<?php
+												}else {
+													?>
+														<b>Quantity: </b><span class="text-danger"><b>Sold out</b></span><br>
+													<?php
+												}
+											?>
 											<b>About: </b><?= $row['phoneDescriptions']?><br>
 										</p>
-							    </div>
-									<button class="btn btn-outline-info btn-sm">Buy</button>
+								</div>
+								<?php
+									if ($row['quantity']>0) {?>
+										<a href="./buyOut.php?idPhone=<?= rand()."fjs".rand()."ldfj".rand()."!".$row['id']."!".rand()."fskrellskj".rand();?>" class="btn btn-outline-info btn-sm btn-flat">Buy</a>
+										<?php
+									}else {
+										?>
+											<a disabled class="btn btn-outline-danger btn-sm btn-flat">Buy</a>
+										<?php
+									}
+								?>
+								
 							   </div><br>
 							</div>
 					<?php
@@ -56,20 +85,11 @@ include("includes/navCustomers.php");
 				echo "<h3 class='alert alert-success'>No phone available</h4>";
 			}
 			?>
-			<script type="text/javascript">
-				function deleteItem(idPhone,phoneName){
-					var ask = confirm("Are you sure you want to delete "+phoneName+" ??");
-					if (ask == true) {
-						window.location='deletePhone.php?idPhone=' +idPhone;
-					}
-				}
-			</script>
 			</div>
 			</div>
 		</div>
-		<div class="col-md-1"></div>
 	</div>
-	<nav class="navbar navbar-expand-lg navbar-default bg-info fixed-bottom" style="height:40px;">
+	<nav class="navbar navbar-expand-lg navbar-default bg-secondary fixed-bottom" style="height:30px;">
 		<div class="container">
 		  <div class="col-md-3"></div>
 		  <div class="col-md-6">
@@ -82,6 +102,11 @@ include("includes/navCustomers.php");
 		  </div>
 		  <div class="col-md-3"></div>
 		</div>
-	  </nav>
+	</nav>
+	<script type="text/javascript">
+		$(function(){
+			$("#cHome").addClass('active');
+		});
+	</script>
 </body>
 </html>

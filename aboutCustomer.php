@@ -5,7 +5,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-	<script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <style>
+		.active{
+			background-color:#ffc107;
+			transition-duration:0.5s;
+		}
+		.nav-item:hover{
+			background-color:#ffc107;
+			transition-duration:0.5s;
+		}
+	</style>
 	<title>HelloPhone</title>
 </head>
 <style>
@@ -15,7 +25,7 @@
 </style>
 <body style="overflow-y: scroll;">
 	<!-- Navigation -->
-	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-secondary fixed-top" style="height:30px;">
+	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-secondary   fixed-top" style="height:40px;">
 		<div class="container">
 			<a class="navbar-brand" href="home.php">
 				<h1 class="text-warning">HelloPhone</h1>
@@ -37,11 +47,11 @@
 				  </li>
 	  
 					<li class="nav-item" id="nav-about">
-					<a class="nav-link" href="aboutLogged.php"><p class="m-0 text-center text-white">About</p></a>
+					<a class="nav-link active" href="aboutCustomer.php"><p class="m-0 text-center text-white">About</p></a>
 				  </li>
 	  
 					<li class="nav-item" id="nav-contact">
-						<a class="nav-link" href="contactLogged.php"><p class="m-0 text-center text-white">Contact</p></a>
+						<a class="nav-link" href="contactCustomers.php"><p class="m-0 text-center text-white">Contact</p></a>
 					  </li>
 					  <li class="nav-item" id="nav-about">
 						<a class="nav-link" href="index.php"><p class="m-0 text-center text-white">Logout</p></a>
@@ -70,7 +80,7 @@
           </div>
   </div>
 </div>
-	<nav class="navbar navbar-expand-lg navbar-default bg-info fixed-bottom" style="height:40px;">
+	<nav class="navbar navbar-expand-lg navbar-default bg-secondary fixed-bottom" style="height:30px;">
 		<div class="container">
 		  <div class="col-md-3"></div>
 		  <div class="col-md-6">
