@@ -1,5 +1,5 @@
 <?php
-include("includes/connect.php");
+include("../includes/connect.php");
 $id = $_GET['idPhone'];
 //echo $id;
 $deleteQuery = mysqli_query($conn,"DELETE FROM phones WHERE id = '$id'");

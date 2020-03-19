@@ -1,8 +1,8 @@
 <?php
-	include("includes/connect.php");
+	include("../includes/connect.php");
 	session_start();
 	if (!$_SESSION['adminLogin']) {
-		echo "<script type='text/javascript'>window.top.location='index.php'</script>";
+		echo "<script type='text/javascript'>window.top.location='../index.php'</script>";
 		}
 	?>
 <!DOCTYPE html>
@@ -11,15 +11,15 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-	<script src="vendor/jquery/jquery.min.js"></script>
+	<link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
+	<script src="../vendor/jquery/jquery.min.js"></script>
 	<title>HelloPhone</title>
 	
 </head>
 <body style="overflow-y: scroll;">
 	<!-- Navigation -->
 	<?php
-include("includes/navAdmin.php");
+include("../includes/navAdmin.php");
 ?>
 	<div class="container">
 		<div class="row">
@@ -41,7 +41,7 @@ include("includes/navAdmin.php");
 							$queryInsert = mysqli_query($conn,"INSERT INTO phones (id,phoneName,price,phoneDescriptions,phoneImange,quantity)
 							VALUES ('','$a','$b','$c','$d','$e')") or die(mysqli_error($conn));
 							if ($queryInsert) {
-								move_uploaded_file($_FILES['pic']['tmp_name'],'media/phonePhoto/'.$d);
+								move_uploaded_file($_FILES['pic']['tmp_name'],'../media/phonePhoto/'.$d);
 								echo "<h4 class='alert alert-success'>Phone registered successfully</h4>";
 							}else{
 								echo "<h4 class='alert alert-danger'>Phone not registered</h4>";
@@ -109,8 +109,8 @@ include("includes/navAdmin.php");
 		  <div class="col-md-3"></div>
 		</div>
 	  </nav>
-	  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	  <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 <script type="text/javascript">

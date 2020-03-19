@@ -1,8 +1,8 @@
 <?php
-	include("includes/connect.php");
+	include("../includes/connect.php");
 	session_start();
 	if (!$_SESSION['userLogin']) {
-		echo "<script type='text/javascript'>window.top.location='index.php'</script>";
+		echo "<script type='text/javascript'>window.top.location='../index.php'</script>";
 		}
 	?>
 <!DOCTYPE html>
@@ -11,31 +11,51 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
+	<script src="../vendor/jquery/jquery.min.js"></script>
+	<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 	<title>HelloPhone</title>
 </head>
 <body style="overflow-y: scroll;">
 	<!-- Navigation -->
 <?php
-include("includes/navCustomers.php");
+include("../includes/navCustomers.php");
 ?>
 		<div class="container">
 		<div class="row">
 		<div class="col-md-12">
 				<div class="row">
-					<div class="col-md-3">
-						<select name="" id="" class="form-control">
-							<option value="">Categories</option>
-						</select>
-					</div>
-					<div class="col-md-9">
-						<input type="text" placeholder="Search here!" class="form-control">
+					<div class="col-md-12">
+						<input type="text" name="search" id="searchId" placeholder="Search here!" class="form-control">
+						<span class="results"></span>
 					</div>
 				</div>
-			</div>&nbsp;
+				<script type="text/javascript">
+					$(document).ready(function(){
+						$("#searchId").keyup(function(){
+							var values = $(this).val();
+							//alert(values);
+							if (values != '') {
+								//alert(values);
+								$(".results").html('');
+								$.ajax({
+									url:"fetchCustomer.php",
+									method:"POST",
+									data:{search:values},
+									dataType:"text",
+									success:function(response){
+										$(".results").html(response);
+									}
+								});
+							}
+							else{
+								$(".results").html('');
+							}
+						});
+					});
+				</script>
+		  </div>&nbsp;
 		 <div class="col-md-12">
 			<?php
 			$query = mysqli_query($conn,"SELECT *FROM phones ORDER BY id DESC") or die(mysqli_error($conn));
@@ -46,7 +66,7 @@ include("includes/navCustomers.php");
 					<?php while ($row = mysqli_fetch_array($query)) {?>
 							<div class="col-md-3">
 							  <div class="card">
-								<img src="media/phonePhoto/<?= $row['phoneImange'];?>" class="card-img-top" alt="...">
+								<img src="../media/phonePhoto/<?= $row['phoneImange'];?>" class="card-img-top" alt="...">
 								<div class="card-body">
 									<h5 class="card-title"><?= $row['phoneName']?></h5>
 										<p class="card-text">
@@ -66,7 +86,7 @@ include("includes/navCustomers.php");
 								</div>
 								<?php
 									if ($row['quantity']>0) {?>
-										<a href="./buyOut.php?idPhone=<?= rand()."fjs".rand()."ldfj".rand()."!".$row['id']."!".rand()."fskrellskj".rand();?>" class="btn btn-outline-info btn-sm btn-flat">Buy</a>
+										<a href="buyOut.php?idPhone=<?= rand()."fjs".rand()."ldfj".rand()."!".$row['id']."!".rand()."fskrellskj".rand();?>" class="btn btn-outline-info btn-sm btn-flat">Buy</a>
 										<?php
 									}else {
 										?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2020 at 11:02 PM
+-- Generation Time: Feb 24, 2020 at 10:53 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -65,57 +65,7 @@ CREATE TABLE `customers` (
 
 INSERT INTO `customers` (`id`, `names`, `email`, `dob`, `gender`, `username`, `password`, `profiles`) VALUES
 (1, 'Customer 1', 'customer1@gmail.com', '2020-02-10', 'Male', 'u1', '123', 'SAM_4509.JPG'),
-(2, 'Dush', 'duh@makfld.rw', '2020-02-12', 'Male', 'user2', '123', 'FB_IMG_15736720104213914.jpg'),
-(4, 'dsd', 'mail@mail.rw', '2020-03-24', 'Male', 'ds', 'fine', 'SAM_4507.JPG'),
-(5, 'Rene', 'rene.mucyo@gmail.com', '2020-03-26', 'Male', 'fdsflkjf', '3232', 'SAM_4507.JPG'),
-(6, 'TUYISENGE', 'renemucyomucici@gmail.com', '2020-03-25', 'Male', 'fsd', '434', 'SAM_4507.JPG');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `district`
---
-
-CREATE TABLE `district` (
-  `district_id` int(11) NOT NULL,
-  `district_name` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `district`
---
-
-INSERT INTO `district` (`district_id`, `district_name`) VALUES
-(1, 'Nyarugenge'),
-(2, 'Gasabo'),
-(3, 'Kicukiro'),
-(4, 'Nyamagabe'),
-(5, 'Nyanza'),
-(6, 'Nyaruguru'),
-(7, 'Ruhango'),
-(8, 'Muhanga'),
-(9, 'Kamonyi'),
-(10, 'Musanze'),
-(11, 'Rwamagana'),
-(12, 'Rubavu'),
-(13, 'Ngoma'),
-(14, 'Ngororero'),
-(15, 'Bugesera'),
-(16, 'Burera'),
-(17, 'Gicumbi'),
-(18, 'Karongi'),
-(19, 'Rulindo'),
-(20, 'Kayonza'),
-(21, 'Huye'),
-(22, 'Gisagara'),
-(23, 'Kirehe'),
-(24, 'Gatsibo'),
-(25, 'Nyagatare'),
-(26, 'Nyabihu'),
-(27, 'Rusizi'),
-(29, 'Gakenke'),
-(30, 'Nyamasheke'),
-(31, 'Rutsiro');
+(2, 'Dush', 'duh@makfld.rw', '2020-02-12', 'Male', 'user2', '123', 'FB_IMG_15736720104213914.jpg');
 
 -- --------------------------------------------------------
 
@@ -135,38 +85,7 @@ CREATE TABLE `feedbacks` (
 --
 
 INSERT INTO `feedbacks` (`id`, `names`, `emails`, `contents`) VALUES
-(2, 'Rene MUCYO TUYISENGE', 'renemucyomucici@gmail.com', 'FSLFJS');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `orders`
---
-
-CREATE TABLE `orders` (
-  `id` int(11) NOT NULL,
-  `phoneId` int(11) NOT NULL,
-  `customerId` int(11) DEFAULT NULL,
-  `phone` varchar(255) NOT NULL,
-  `addresses` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `quantity` int(11) DEFAULT NULL,
-  `total` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`id`, `phoneId`, `customerId`, `phone`, `addresses`, `email`, `quantity`, `total`) VALUES
-(9, 10, 1, '0788882726', '20', 'conso@hellophone.rw', 12, 1320000),
-(10, 13, 1, '0788826149', '2', 'maryseisimbi@hellophone.rw', 34, 4080000),
-(11, 13, 1, '0788826149', '12', 'isimbimaryse@gmail.rw', 43, 5203000),
-(12, 13, 1, '0788890071', '8', 'rwanda@gmail.rw', 23, 2783000),
-(13, 15, 1, '0784494820', '10', 'renemucyomucici@gmail.com', 5454, 654480000),
-(14, 12, 1, '0784494820', '20', 'renemucyomucici@gmail.com', 12, 1080000),
-(15, 15, 1, '0784494820', '14', 'renemucyomucici@gmail.com', 343, 41160000),
-(16, 15, 1, '0784494820', '27', 'renemucyomucici@gmail.com', 44, 5280000);
+(1, 'Here 1', 'mail@mail.rw', 'fsaflasjlfkjas');
 
 -- --------------------------------------------------------
 
@@ -188,13 +107,9 @@ CREATE TABLE `phones` (
 --
 
 INSERT INTO `phones` (`id`, `phoneName`, `price`, `phoneDescriptions`, `phoneImange`, `quantity`) VALUES
-(2, 'Phantom 1', '150000', '12 Inch, 4G', 'phone1.jfif', '23'),
-(8, 'Phantom 5', '200000', '5G AND NIBINDIggg', 'phone3.jfif', '15'),
-(9, 'Phantom 5', '2500000', 'FDSALFSALFL FJSLKLKS FDJK', 'phone3.jfif', '43'),
-(10, 'CAMON 12', '110000', 'Some of descriptions of CAMON C12 experienced', 'phone2.jfif', '0'),
-(12, 'CAMON C11', '90000', 'Camon c11 is the teckno\'s latest version of recent camon that the teckno users should have to experience', 'phone3.jfif', '33'),
-(13, 'CAMON C 10', '121000', 'This is the best phone ever that we are encouraging you to buy it\'s strong and it have warrant of two years after one or certain BASIC', 'phone1.jfif', '0'),
-(15, 'CAMON C X Pro', '120000', 'Lorem lorem lorem harry up harry up this is super and super phone that, as a techno board we are encouraging you to by but it is too cheap and is strong', 'phone2.jfif', '-1');
+(2, 'Phantom 1', '150001', '12 Inch, 4G', 'phone3.jfif', '11'),
+(8, 'Phantom 3', '200000', '5G AND NIBINDI', 'phone3.jfif', '14'),
+(9, 'Phantom 5', '2500000', 'FDSALFSALFL FJSLKLKS FDJK', 'phone3.jfif', '43');
 
 --
 -- Indexes for dumped tables
@@ -213,24 +128,10 @@ ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `district`
---
-ALTER TABLE `district`
-  ADD PRIMARY KEY (`district_id`);
-
---
 -- Indexes for table `feedbacks`
 --
 ALTER TABLE `feedbacks`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `orders`
---
-ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `phoneFk1` (`phoneId`),
-  ADD KEY `customerFk` (`customerId`);
 
 --
 -- Indexes for table `phones`
@@ -251,38 +152,17 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `district`
---
-ALTER TABLE `district`
-  MODIFY `district_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `feedbacks`
 --
 ALTER TABLE `feedbacks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `orders`
---
-ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `phones`
 --
 ALTER TABLE `phones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `orders`
---
-ALTER TABLE `orders`
-  ADD CONSTRAINT `customerFk` FOREIGN KEY (`customerId`) REFERENCES `customers` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `phoneFk1` FOREIGN KEY (`phoneId`) REFERENCES `phones` (`id`) ON DELETE CASCADE;
-COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

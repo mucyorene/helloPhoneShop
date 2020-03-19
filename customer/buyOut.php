@@ -1,7 +1,7 @@
-<?php include("includes/connect.php");
+<?php include("../includes/connect.php");
     	session_start();
         if (!$_SESSION['userLogin']) {
-            echo "<script type='text/javascript'>window.top.location='index.php'</script>";
+            echo "<script type='text/javascript'>window.top.location='../index.php'</script>";
             }
             $owner = $_SESSION['userLogin'];
             $all = $_GET['idPhone'];
@@ -18,13 +18,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="vendor/jquery/jquery.min.js"></script>
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
+	<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../vendor/jquery/jquery.min.js"></script>
     <title>Document</title>
 </head>
 <body style="overflow-y: scroll;">
-<?php include("includes/navCustomers.php")?>
+<?php include("../includes/navCustomers.php")?>
     <div class="container">
     <div class="row">
         <div class="col-md-1"></div>
@@ -43,12 +43,33 @@
                             $phoneId = $phone['id'];
                             $customerId = $row['id'];            
                             $total = (($phone['price'])*$a);
-                            $quer = mysqli_query($conn,"SELECT *FROM orders WHERE email='$c' AND quantity='$a' AND phone= '$b' AND 
+                            $quer = mysqli_query($conn,"SELECT *FROM orders WHERE email='$c' AND phone= '$b' AND 
                             phoneId = '$phoneId'") or die(mysqli_error($conn));
                             if (mysqli_num_rows($quer)>0) {
-                                echo "<h3 class='alert alert-danger'>Already registered</h3>";
+                                $fes = mysqli_fetch_array($quer);
+                                $newQty = $fes['quantity'] + $a;
+                                //Reducing value from existing quantity
+                                $remQty = (($phone['quantity'])-$a);
+                                //And now get new total
+                                $totalOrder = (($phone['price'])*$newQty);
+                                //Customer id
+                                $customerId = $row['id']; 
+                                //update required quantity
+                               $updateQuantity = mysqli_query($conn,"UPDATE orders SET 
+                               quantity = '$newQty',
+                               total = $totalOrder WHERE phoneId ='$phoneId'
+                               AND customerId = '$customerId'
+                               ")or die(mysqli_error($conn));
+                               //update to get new value for remaining quantity
+                               $remains = mysqli_query($conn,"UPDATE phones SET quantity='$remQty' WHERE id='$phoneId'")
+                                or die(mysqli_error($conn));
+                               if ($updateQuantity) {
+                                echo "<h4 class='alert alert-success'>Thank you adding quantity</h4>";
+                               }else{
+                                echo "<h4 class='alert alert-danger'>The order doesn't not exist</h4>";
+                               }
                             }else{
-                                if (($phone['quantity'])<$a) {
+                                if (($phone['quantity'])>$a) {
                                     if (is_numeric($d)) {
                                         $remQty = (($phone['quantity'])-$a);
                                         $q = mysqli_query($conn,"INSERT INTO orders (id,phoneId,customerId,phone,addresses,email,quantity,
@@ -162,7 +183,7 @@
         $("#cHome").addClass('active');
     });
 </script>
-<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>	
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>	
 </body>
 </html>

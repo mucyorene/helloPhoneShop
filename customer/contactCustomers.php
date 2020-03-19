@@ -5,14 +5,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>HelloPhone |</title>
-	<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="vendor/jquery/jquery.min.js"></script>	
+	<link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
+	<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../vendor/jquery/jquery.min.js"></script>	
 </head>
 <body style="overflow-y: scroll;">
 	<!-- Navigation -->
 	<?php
-include("includes/navCustomers.php");
+include("../includes/navCustomers.php");
 ?>
 	<div class="container">
 		<div class="row">
@@ -56,6 +56,8 @@ include("includes/navCustomers.php");
 	  </nav>
 </body>
 </html>
+	<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script>
 	$(function(){
 		$("#cContact").addClass('active');

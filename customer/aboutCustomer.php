@@ -4,8 +4,10 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-    <script src="vendor/jquery/jquery.min.js"></script>
+	<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
+	<script src="../vendor/jquery/jquery.min.js"></script>
+	<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
     <style>
 		.active{
 			background-color:#ffc107;
@@ -64,7 +66,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-              <img src="Photos/about.jfif" style="width: 1250px;height: 300px;" alt=""><br>
+              <img src="../Photos/about.jfif" style="width: 1250px;height: 300px;" alt=""><br>
               <div class="row">
                   <div class="col-md-6 text-center">
                       <h1>Our Mission </h1>
@@ -94,7 +96,7 @@
 		  <div class="col-md-3"></div>
 		</div>
 	  </nav>
-		<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-		<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+		<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

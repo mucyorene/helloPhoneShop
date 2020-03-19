@@ -1,5 +1,5 @@
 <?php
-	include("includes/connect.php");
+	include("../includes/connect.php");
 	session_start();
 	
 	$idAll = $_GET['idToUpdate'];
@@ -7,7 +7,7 @@
 	$id = $ids[1];
         //echo $id;
 	if (!$_SESSION['adminLogin']) {
-		echo "<script type='text/javascript'>window.top.location='index.php'</script>";
+		echo "<script type='text/javascript'>window.top.location='../index.php'</script>";
         }
         $sel = mysqli_query($conn,"SELECT *FROM phones WHERE id = '$id'") or die(mysqli_error());
         $row = mysqli_fetch_array($sel);
@@ -18,17 +18,17 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
+	<script src="../vendor/jquery/jquery.min.js"></script>
+	<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 	<title>HelloPhone</title>
 	
 </head>
 <body style="overflow-y: scroll;">
 	<!-- Navigation -->
 	<?php
-include("includes/navAdmin.php");
+include("../includes/navAdmin.php");
 ?>
 	<div class="container">
 		<div class="row">
@@ -53,7 +53,7 @@ include("includes/navAdmin.php");
                                 quantity = '$e' WHERE id = '$id'") or die(mysqli_error($conn));
                             if($edit){
                                 move_uploaded_file($_FILES['pic']['tmp_name'],'media/phonePhoto/'.$d);
-                                echo "<script>window.top.location = 'admin.php'</script>";
+                                echo "<script>window.top.location = '../admin/admin.php'</script>";
                             }
 						}elseif (!empty($a) && !empty($b) && !empty($c) && !empty($e)) {
 							$edit = mysqli_query($conn,"UPDATE phones SET 
@@ -63,7 +63,7 @@ include("includes/navAdmin.php");
                                 quantity = '$e' WHERE id = '$id'") or die(mysqli_error($conn));
                             if($edit){
                                 move_uploaded_file($_FILES['pic']['tmp_name'],'media/phonePhoto/'.$d);
-                                echo "<script>window.top.location = 'admin.php'</script>";
+                                echo "<script>window.top.location = '../admin/admin.php'</script>";
                             }
 						}
 						else{

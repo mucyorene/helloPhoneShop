@@ -1,5 +1,5 @@
 <?php
-	include("includes/connect.php");
+	include("../includes/connect.php");
 	session_start();
 	if (!$_SESSION['adminLogin']) {
 		echo "<script type='text/javascript'>window.top.location='index.php'</script>";
@@ -12,14 +12,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>HelloPhone |</title>
-	<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="vendor/jquery/jquery.min.js"></script>	
+	<link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
+	<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../vendor/jquery/jquery.min.js"></script>	
 </head>
 <body style="overflow-y: scroll;">
 	<!-- Navigation -->
 	<?php
-include("includes/navAdmin.php");
+include("../includes/navAdmin.php");
 ?>
 	<div class="container">
 		<div class="row">
@@ -85,7 +85,7 @@ include("includes/navAdmin.php");
 		var ask = confirm("Are you sure you want to delete this order??");
 		if (ask == true) {
 			//alert(id);
-			window.location='pages/deleteOrder.php?orderId=s32fd2f332l39!'+id+"!ffk2l3]f3323444rsfd23ffweq098oi";
+			window.location='deleteOrder.php?orderId=s32fd2f332l39!'+id+"!ffk2l3]f3323444rsfd23ffweq098oi";
 		}
 	}
 </script>

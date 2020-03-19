@@ -1,8 +1,8 @@
 <?php
-	include("includes/connect.php");
+	include("../includes/connect.php");
 	session_start();
 	if (!$_SESSION['adminLogin']) {
-		echo "<script type='text/javascript'>window.top.location='index.php'</script>";
+		echo "<script type='text/javascript'>window.top.location='../index.php'</script>";
 		}
 	?>
 <!DOCTYPE html>
@@ -12,14 +12,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>HelloPhone |</title>
-	<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="vendor/jquery/jquery.min.js"></script>	
+	<link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
+	<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../vendor/jquery/jquery.min.js"></script>	
 </head>
 <body style="overflow-y: scroll;">
 	<!-- Navigation -->
 	<?php
-include("includes/navAdmin.php");
+include("../includes/navAdmin.php");
 ?>
 	<div class="container">
 		<div class="row">
@@ -27,27 +27,31 @@ include("includes/navAdmin.php");
             <div class="col-md-8">
                 <table class="table table-hover">
                     <tr>
-						<th>N<sup>o</sup></th>
-						<th>NAMES</th>
-						<th>EMAIL</th>
-						<th>COMMENT</th>
-						<th>ACTION</th>
+                        <td>N<sup>o</sup></td><td>Thumbnail</td>
+						<td>Phone Name</td>
+						<td>Price</td>
+						<td>Available</td>
+						<td>Total</td>
                     </tr>
                     <?php
-                        $query = mysqli_query($conn,"SELECT *FROM feedbacks");
+                        $query = mysqli_query($conn,"SELECT *FROM phones ORDER BY id DESC");
                         if (mysqli_num_rows($query)>0) {
                             $a = 1;
                             while ($fe = mysqli_fetch_array($query)) {
                                ?>
                                <tr>
-								<td><?= $a;?></td><td><?= $fe['names']?></td><td><?= $fe['emails']?></td><td><?= $fe['contents']?></td>
-								<td><a href="pages/deleteComment.php?id=<?= rand()."jk@kl(*fddw][".rand()."LlfkeLjjNK".rand()."!".$fe['id']."!".rand()."dJKLL[sdFsd!".rand()."343er!KSfd]]fdss"?>" class="btn btn-sm btn-danger">Delete</a></td>
+                                <td><?= $a;?></td>
+								<td><img src="../media/phonePhoto/<?= $fe['phoneImange']?>" alt="No Image found"></td>
+								<td><?= $fe['phoneName']?></td>
+								<td><?= $fe['price']?></td>
+								<td><?= $fe['quantity']?></td>
+								<td><?= (($fe['quantity'])*($fe['price']))?></td>
                                </tr>
                                <?php
                             $a++;}
                         }
                     ?>
-                </table>
+                </table><br>
             </div>
 			<div class="col-md-2"></div>
 		</div>
@@ -68,8 +72,10 @@ include("includes/navAdmin.php");
 	  </nav>
 </body>
 </html>
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script>
     $(function(){
-        $("#admin5").addClass('active');
+        $("#admin3").addClass('active');
     });
 </script>
