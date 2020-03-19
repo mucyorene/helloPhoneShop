@@ -1,7 +1,7 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-secondary fixed-top" style="height:5%;">
 	<div class="container">
 		<a class="navbar-brand" href="">
-			<h1 class="text-warning">HelloPhone</h1>
+			<img src="../media/logo/helloPhone.png" width="150" height="40" alt="">
 		</a>
 		<!-- <a class="navbar-brand" href="home.php">
 		<p class="m-0 text-white text-center">WEDDING CATERING SERVICE MANAGEMENT SYSTEM</p>
