@@ -1,4 +1,7 @@
-<?php include("../includes/connect.php")?>
+<?php
+include("../includes/connect.php");
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,118 +20,42 @@
 			transition-duration:0.3s;
 		}
 	</style>
-    <title>Document</title>
+    <title>Cart</title>
 </head>
 <body style="overflow-y: scroll;">
 	
 <?php include("../includes/indexNav.php");?>
 
-        <div class="container">
-        <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-5"></div>
-        <div class="col-md-5">
-            <fieldset>
-					<legend><h2 class="text-info">FILL OUT INFORMATION</h2></legend>
-					<?php
-						if (isset($_POST['buy'])) {
-                            $a = mysqli_real_escape_string($conn,$_POST['qty']);
-                            $b = mysqli_real_escape_string($conn,$_POST['phone']);                            
-                            $c = mysqli_real_escape_string($conn,$_POST['mail']);	
-                            $d = mysqli_real_escape_string($conn,$_POST['addr']);
-                            $phoneId = $phone['id'];
-                            $customerId = $row['id'];            
-                            $total = (($phone['price'])*$a);
-                            $quer = mysqli_query($conn,"SELECT *FROM orders WHERE email='$c' AND quantity='$a' AND phone= '$b' AND 
-                            phoneId = '$phoneId'") or die(mysqli_error($conn));
-                            if (mysqli_num_rows($quer)>0) {
-                                echo "<h3 class='alert alert-danger'>Alread registered</h3>";
-                            }else{
-                                $q = mysqli_query($conn,"INSERT INTO orders (id,phoneId,customerId,phone,addresses,email,quantity,
-                                total) VALUES ('','$phoneId','$customerId','$b','$d','$c','$a','$total')") or die(mysqli_error($conn));
-                                    if ($q) {
-                                        echo "<h4 class='alert alert-success'>Thank you for buying</h4>";
-                                    }else{
-                                        echo "<h4 class='alert alert-danger'>Failed to buy</h4>";
-                                    }
-                            }
-
-						}
-					?>
-					<form action="" name="phoneRegister" class="form" method="POST" onsubmit="return validatePhone();">
-						<div class="form-group">
-							<label for="" class="form-control-label">Name</label>
-							<input type="text" name="phoneNames" disabled class="form-control" id="">
-							<span class="text-danger" id="messagePhone"></span>
-						</div>
-						<div class="form-group row">
-							<div class="col-md-4">
-							    <label for="" class="form-control-label">Price</label>
-							</div>
-							<div class="col-md-4">
-							<input type="number" disabled class="form-control" id="">
-							</div>
-							<div class="col-md-4">
-							<input type="number" placeholder="/Rwf" class="form-control" disabled>
-							</div>
-							<div class="col-md-4"></div>
-							<div class="col-md-8">
-							<span class="text-danger" id="messagePrice"></span>
-							</div>
-						</div>
-						<div class="form-group row">
-							<div class="col-md-4">
-                                <label for="" class="form-control-label">Quantity</label>
-                            </div>
-						    <div class="col-md-8">
-							    <input type="number" name="qty" placeholder="Quantity" class="form-control" id="">
-							    <span class="text-danger" id="messageQuantity"></span>
-						    </div>
-                        </div>
-                        <div class="form-group row">
-							<div class="col-md-4">
-                                <label for="phone" class="form-control-label">Telephone Number</label>
-                            </div>
-						    <div class="col-md-8">
-							    <input type="number" name="phone" placeholder="Your phone Number" class="form-control" id="">
-							    <span class="text-danger" id="messageQuantity"></span>
-						    </div>
-                        </div>
-                        <div class="form-group row">
-							<div class="col-md-4">
-                                <label for="phone" class="form-control-label">Email</label>
-                            </div>
-						    <div class="col-md-8">
-							    <input type="email" name="mail" placeholder="Email" class="form-control" id="">
-							    <span class="text-danger" id="messageQuantity"></span>
-						    </div>
-						</div>
-                        <div class="form-group row">
-							<div class="col-md-4">
-                                <label for="" class="form-control-label">Address</label>
-                            </div>
-						    <div class="col-md-8">
-							    <select name="addr" class="form-control" id="district">
-                                    <option value="">SELECT DISTRICT</option>
-                                    <?php
-                                      $dis = mysqli_query($conn,"SELECT *FROM district ORDER BY district_name ASC") or die(mysqli_error($conn));   
-                                      while ($fet = mysqli_fetch_array($dis)) {
-                                       ?>
-                                          <option value="<?= $fet['district_id'];?>"><?= $fet['district_name'];?></option>
-                                       <?php
-                                      }     
-                                    ?>
-                                </select>
-							    <span class="text-danger" id="messageQuantity"></span>
-						    </div>
-						</div>
-						<input type='submit' class="btn btn-info btn-sm" name="buy" value="Check out">
-					</form>
-		    </fieldset>
-        </div>
-        <div class="col-md-1"></div>
-        </div>
-        </div>
+<div class="container">
+	<div class="row">
+	<?php
+	if($_GET['saveToCart']){
+		$all=explode(',',$_GET['saveToCart']);
+		$user = $all[0];
+		$phoneId = $all[1];
+		// echo $phoneId;
+		// echo $user;
+			$product = mysqli_query($conn,"SELECT *FROM phones WHERE id = '$phoneId'") or die(mysqli_error($conn));
+				
+			if (mysqli_num_rows($product)>0) {
+				$checkExists = mysqli_query($conn,"SELECT *FROM cart WHERE productIds = '$phoneId'") or die(mysqli_error($conn));
+				if (mysqli_num_rows($checkExists)>0) {
+					echo "";
+				}else{
+					$fe = mysqli_fetch_array($product);
+					$phoneName = $fe['phoneName'];
+					$phonePrice = $fe['price'];
+					$cart = mysqli_query($conn,"INSERT INTO
+					cart (id,userId,productIds,productName,price,value,dateAdded) VALUES 
+					('','$user','$phoneId','$phoneName','$phonePrice','1','')") 
+					or die(mysqli_error($conn));
+				}
+			}
+	}
+	?>
+		
+	</div>
+</div>
     <nav class="navbar navbar-expand-lg navbar-default bg-secondary fixed-bottom" style="height:30px;">
 		<div class="container">
 				<div class="col-md-3"></div>

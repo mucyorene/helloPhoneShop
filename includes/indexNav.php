@@ -26,7 +26,7 @@
 											<a class="nav-link" href="login.php"><p class="m-0 text-white">Login</p></a>
 										</li>
 										<li class="nav-item" id="h4">
-											<a class="nav-link" href="cart.php"><p class="m-0 text-white">
+											<a class="nav-link" href="cart.php?saveToCart"><p class="m-0 text-white">
 												Cart <span class="badge badge-warning text-danger">13</span></p></a>
 										</li>
 								</ul>
